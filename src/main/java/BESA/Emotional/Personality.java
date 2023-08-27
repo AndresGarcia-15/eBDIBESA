@@ -1,3 +1,14 @@
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
 package BESA.Emotional;
 
 import java.util.HashMap;
@@ -8,8 +19,8 @@ public class Personality {
     public enum EmotionElementType {
 
         Object, Person, Event
-    };
-
+    }
+    
     private final Map<String, String> objectRelationships;
     private final Map<String, String> personRelationships;
     private final Map<String, String> eventDesirability;
@@ -21,12 +32,15 @@ public class Personality {
     }
 
     private Map getList(EmotionElementType t) {
-        if (t.equals(EmotionElementType.Object)) {
-            return this.objectRelationships;
-        } else if (t.equals(EmotionElementType.Person)) {
-            return this.personRelationships;
-        } else if (t.equals(EmotionElementType.Event)) {
-            return this.eventDesirability;
+        switch (t) {
+            case Object:
+                return this.objectRelationships;
+            case Person:
+                return this.personRelationships;
+            case Event:
+                return this.eventDesirability;
+            default:
+                break;
         }
         return null;
     }

@@ -1,3 +1,14 @@
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
 package BESA.Emotional;
 
 import java.util.ArrayList;
@@ -12,7 +23,7 @@ public class EmotionalState {
         emotions = new ArrayList<>();
     }
 
-    public void addEmotionAxis(EmotionAxis ea) {
+    protected void addEmotionAxis(EmotionAxis ea) {
         EmotionAxis x = getEmotion(ea.getPositiveName(), ea.getNegativeName());
         if (x == null) {
             emotions.add(ea);
@@ -24,13 +35,13 @@ public class EmotionalState {
         }
     }
 
-    public void updateEmotions(String event, float intensity) {
+    protected void updateEmotions(String event, float intensity) {
         for (EmotionAxis e : emotions) {
             e.updateIntensity(event, intensity);
         }
     }
 
-    public EmotionAxis getEmotion(String positiveName, String negativeName) {
+    protected EmotionAxis getEmotion(String positiveName, String negativeName) {
         EmotionAxis ea = null;
         Iterator itr = emotions.iterator();
         if (itr != null) {
@@ -51,7 +62,7 @@ public class EmotionalState {
         return emotions.toString();
     }
 
-    public EmotionAxis getMostActivatedEmotion() {
+    protected EmotionAxis getMostActivatedEmotion() throws CloneNotSupportedException {
         EmotionAxis ea = null;
         Iterator itr = emotions.iterator();
         if (itr != null) {
@@ -69,7 +80,7 @@ public class EmotionalState {
         }
     }
 
-    public List<EmotionAxis> getEmotionsListCopy() {
+    protected List<EmotionAxis> getEmotionsListCopy() throws CloneNotSupportedException {
         List<EmotionAxis> list = new ArrayList<>();
         Iterator itr = emotions.iterator();
         if (itr != null) {
@@ -79,4 +90,11 @@ public class EmotionalState {
         }
         return list;
     }
+
+    public List<EmotionAxis> getEmotions() {
+        return emotions;
+    }
+    
+    
+    
 }

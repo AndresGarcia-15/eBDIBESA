@@ -1,23 +1,39 @@
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
 package BESA.Emotional;
 
-import BESA.Emotional.Utils.Utils;
 import BESA.Emotional.Personality.EmotionElementType;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmotionalActor {
+public abstract class EmotionalModel {
 
     protected final EmotionalState emotionalState;
     protected final Personality personality;
 
-    public EmotionalActor() {
+    public EmotionalModel() {
         this.emotionalState = new EmotionalState();
         this.personality = new Personality();
+        this.configureEmotionalModel();
     }
 
     public void addEmotionAxis(EmotionAxis ea) {
-        emotionalState.addEmotionAxis(ea.clone());
+        try {
+            emotionalState.addEmotionAxis(ea.clone());
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(EmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setPersonRelationship(String person, String relationship) {
@@ -37,7 +53,11 @@ public class EmotionalActor {
 
     public void processEmotionalEvent(EmotionalEvent ev) {
         float i = estimateEmotionIntensity(ev);
+        if (ev.getPerson() != null) {
+            System.out.println("XEREVENTO: " + ev + " Valencia" + i);
+        }
         emotionalState.updateEmotions(ev.getEvent(), i);
+        System.out.println(ev.toString());
         emotionalStateChanged();
     }
 
@@ -54,8 +74,8 @@ public class EmotionalActor {
                 + Utils.Config.EventWeight * Math.abs(event)
                 + Utils.Config.ObjectWeight * Math.abs(object);
         boolean valence = estimateValence(person, event, object);
-        //System.out.println("P:" + person + " E:" + event + " O:" + object);
-        //System.out.println("Val: " + valence);
+//        System.out.println("P:" + person + " E:" + event + " O:" + object);
+//        System.out.println("Val: " + valence);
         intensity = (valence ? 1 : -1) * intensity;
         return intensity;
     }
@@ -71,6 +91,7 @@ public class EmotionalActor {
         event = event / Math.abs(event);
         object = object / Math.abs(object);
 
+        //System.out.println("Valence P:" + person + " E:" + event + " O:" + object);
         if ((person.equals(event) && event.equals(object))
                 || (person.equals(1f) && event.equals(-1f) && object.equals(-1f))) {
             v = true;
@@ -79,15 +100,13 @@ public class EmotionalActor {
         return v;
     }
 
-    public void emotionalStateChanged() {
+    public abstract void emotionalStateChanged();
 
-    }
-
-    public EmotionAxis getMostActivatedEmotion() {
+    public EmotionAxis getMostActivatedEmotion() throws CloneNotSupportedException {
         return this.emotionalState.getMostActivatedEmotion();
     }
 
-    public List<EmotionAxis> getEmotionsListCopy() {
+    public List<EmotionAxis> getEmotionsListCopy() throws CloneNotSupportedException {
         return this.emotionalState.getEmotionsListCopy();
     }
 
@@ -100,19 +119,42 @@ public class EmotionalActor {
     private void checkItemInSemanticDictionary(EmotionElementType type, String key) {
         Float v = SemanticDictionary.getInstance().getSemanticValue(type, key);
         if (v == null) {
-            String typeName = "Persons";
+            String typeName = "Personas";
             if (type == EmotionElementType.Event) {
-                typeName = "Events";
+                typeName = "Eventos";
             } else if (type == EmotionElementType.Object) {
-                typeName = "Objects";
+                typeName = "Objetos";
             }
-            String msg = "The semantic dictionary of " + typeName + " does not have an item with key " + key;
-            Logger.getLogger(EmotionalActor.class.getName()).log(Level.WARNING, msg);
+            String msg = "El diccionario semántico de " + typeName + " no contiene un item con el nombre " + key;
+            System.out.println("ERROR: " + msg);
+            Logger.getLogger(EmotionalModel.class.getName()).log(Level.WARNING, msg);
         }
     }
-    
-    public EmotionAxis getEmotionAxis(String positiveName, String negativeName) {
-        return emotionalState.getEmotion(positiveName, negativeName);
+
+    private void configureEmotionalModel() {
+        loadSemanticDictionary();
+        loadCharacterDescriptor();
+        loadEmotionalAxes();
     }
+
+    protected EmotionAxis getTopEmotionAxis() throws CloneNotSupportedException {
+        EmotionAxis maxAx = null;
+        double val = Double.NEGATIVE_INFINITY;
+        List<EmotionAxis> emoList = emotionalState.getEmotionsListCopy();
+//            System.out.println("Ejes de la lista: " + emoList.size());
+        for (EmotionAxis e : emoList) {
+            if (e.getCurrentValue() > val) {
+                maxAx = e;
+                val = e.getCurrentValue();
+            }
+        }
+        return maxAx;
+    }
+
+    public abstract void loadSemanticDictionary();
+
+    public abstract void loadCharacterDescriptor();
+
+    public abstract void loadEmotionalAxes();
 
 }

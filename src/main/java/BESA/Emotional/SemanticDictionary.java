@@ -1,3 +1,14 @@
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
 package BESA.Emotional;
 
 import BESA.Emotional.Personality.EmotionElementType;
@@ -26,13 +37,16 @@ public class SemanticDictionary {
         return instance;
     }
 
-    private Map getList(EmotionElementType t) {
-        if (t.equals(EmotionElementType.Object)) {
-            return this.objectRelationships;
-        } else if (t.equals(EmotionElementType.Person)) {
-            return this.personRelationships;
-        } else if (t.equals(EmotionElementType.Event)) {
-            return this.eventDesirability;
+    private Map<String, SemanticValue> getList(EmotionElementType t) {
+        switch (t) {
+            case Object:
+                return this.objectRelationships;
+            case Person:
+                return this.personRelationships;
+            case Event:
+                return this.eventDesirability;
+            default:
+                break;
         }
         return null;
     }

@@ -1,4 +1,15 @@
-package BESA.Emotional.Utils;
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
+package BESA.Emotional;
 
 public final class Utils {
 

@@ -14,6 +14,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>BESA</groupId>
+      <artifactId>KernelBESA</artifactId>
+      <version>3.17.1</version>
+    </dependency>
   </dependencies>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

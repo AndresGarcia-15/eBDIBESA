@@ -1,6 +1,16 @@
+/**
+ * ==========================================================================
+ * eBDIBESA, Emotional Component for BESA Agents                            *
+ * @version 1.0                                                             *
+ * @since 2023                                                              *
+ * @author Daniel Valencia                                                  *
+ * @author Juan Leon                                                        *
+ * @author Jairo Serrano                                                    *
+ * @author Enrique Gonzalez                                                 *
+ * ==========================================================================
+ */
 package BESA.Emotional;
 
-import BESA.Emotional.Utils.Utils;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -55,12 +65,12 @@ public class EmotionAxis {
         this.forgetFactor = forgetFactor;
     }
 
-    protected final void setCurrentValue(float value) {
+    public final void setCurrentValue(float value) {
         this.currentValue = Utils.checkNegativeOneToOneLimits(value);
         this.lastForgetUpdateTime = new Date();
     }
 
-    protected final void setBaseValue(float value) {
+    public final void setBaseValue(float value) {
         this.baseValue = Utils.checkNegativeOneToOneLimits(value);
     }
 
@@ -85,11 +95,16 @@ public class EmotionAxis {
         return eventInfluence.get(eventName);
     }
 
-    protected Map<String, Float> getEventInfluences() {
+    public Map<String, Float> getEventInfluences() {
         return eventInfluence;
     }
+    public void printEventInfluences(){
+        for (String object : eventInfluence.keySet()) {
+//            System.out.println("Event: "+object+" Object: "+eventInfluence.get(object));
+        }
+    }
 
-    protected void updateIntensity(String event, float intensity) {
+    public void updateIntensity(String event, float intensity) {
         Float influence = getEventInfluence(event);
         if (influence != null) {
             intensity = influence * intensity;
@@ -97,16 +112,19 @@ public class EmotionAxis {
         }
     }
 
-    @Override
-    public String toString() {
+    public String getDescription() {
         String str = this.positiveName + "/" + this.negativeName
                 + " {Value:" + this.getCurrentValue() + " Base:" + this.getBaseValue() + "}";
         str += " EvInf: " + eventInfluence.toString();
         return str;
     }
+    @Override
+    public String toString() {
+        return this.positiveName + "/" + this.negativeName;
+    }
 
     @Override
-    public EmotionAxis clone() {
+    public EmotionAxis clone() throws CloneNotSupportedException {
         EmotionAxis e = new EmotionAxis(this.positiveName, this.negativeName, this.getCurrentValue(), this.baseValue, this.forgetFactor);
         Iterator itr = eventInfluence.keySet().iterator();
         if (itr != null) {
