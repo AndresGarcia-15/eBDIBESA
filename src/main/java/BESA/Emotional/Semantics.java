@@ -117,9 +117,7 @@ public class Semantics {
         public static String Excited = "Excited"; // Positive
 
         // Negative Emotions
-        public static String Sadness = "Sadness"; // Negative
         public static String Frustrated = "Frustrated"; // Negative
-        public static String Fear = "Fear"; // Negative
         public static String Anxious = "Anxious"; // Negative
         public static String Uncertainty = "Uncertainty"; // Negative
 
@@ -127,8 +125,6 @@ public class Semantics {
         public static String Indifferent = "Indifferent"; // Neutral
 
         // Mixed Emotions
-        public static String Love = "Love"; // Mixed with Hate
-        public static String Hate = "Hate"; // Mixed with Love
         public static String Confident = "Confident"; // Mixed with Insecure
         public static String Insecure = "Insecure"; // Mixed with Confident
 
@@ -140,21 +136,40 @@ public class Semantics {
         public static String Calm = "Calm"; // Calmness
         public static String Agitated = "Agitated"; // Agitation
 
-        // Based on the OCC model
-        public static String Joy = "Joy";
-        public static String Hope = "Hope";
-        public static String Relief = "Relief";
-        public static String Disappointment = "Disappointment";
-
-        // Based on people
-        public static String Admiration = "Admiration";
-        public static String Reproach = "Reproach";
-        public static String Pride = "Pride";
-        public static String Shame = "Shame";
-
         // Based on objects
         public static String Like = "Like";
         public static String Dislike = "Dislike";
+        
+        // Emociones basadas en el modelo OCC
+        // Emociones basadas en consecuencias de eventos
+        public static String Joy = "Joy";
+        public static String Sadness = "Sadness";
+        public static String Hope = "Hope";
+        public static String Fear = "Fear";
+        public static String Relief = "Relief";
+        public static String Disappointment = "Disappointment";
+
+        // Emociones basadas en acciones de agentes o personas
+        public static String Pride = "Pride";
+        public static String Shame = "Shame";
+        public static String Admiration = "Admiration";
+        public static String Reproach = "Reproach"; // Desprecio
+        public static String Gratitude = "Gratitude";
+        public static String Anger = "Anger";
+
+        // Emociones basadas en objetos
+        public static String Liking = "Liking"; // Atracción
+        public static String Disliking = "Disliking"; // Repulsión
+
+        // Emociones compuestas
+        public static String Optimism = "Optimism";
+        public static String Pessimism = "Pessimism";
+        public static String Love = "Love";
+        public static String Hate = "Hate";
+        public static String Envy = "Envy";
+        public static String Jealousy = "Jealousy";
+        public static String Remorse = "Remorse";
+        public static String Agony = "Agony"; // Agobio
     }
 
 
