@@ -126,15 +126,19 @@ public class Semantics {
 
         // Mixed Emotions
         public static String Confident = "Confident"; // Mixed with Insecure
+        public static String Secure = "Secure"; // Mixed with Insecure
         public static String Insecure = "Insecure"; // Mixed with Confident
 
         // Relief and Anger
         public static String Relieved = "Relieved"; // Relief
         public static String Angry = "Angry"; // Anger
+        public static String Overwhelmed = "Overwhelmed"; // Overwhelmed
 
         // Calmness and Agitation
         public static String Calm = "Calm"; // Calmness
         public static String Agitated = "Agitated"; // Agitation
+        public static String Focused = "Focused"; // Calmness
+        public static String Distracted = "Distracted"; // Calmness
 
         // Based on objects
         public static String Like = "Like";

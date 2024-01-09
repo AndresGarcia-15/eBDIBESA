@@ -106,8 +106,14 @@ public abstract class EmotionalModel {
         return this.emotionalState.getMostActivatedEmotion();
     }
 
-    public List<EmotionAxis> getEmotionsListCopy() throws CloneNotSupportedException {
-        return this.emotionalState.getEmotionsListCopy();
+    public List<EmotionAxis> getEmotionsListCopy() {
+        
+        try {
+            return this.emotionalState.getEmotionsListCopy();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(EmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;            
+        }
     }
 
     @Override
