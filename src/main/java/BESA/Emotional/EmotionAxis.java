@@ -73,6 +73,10 @@ public class EmotionAxis {
     public final void setBaseValue(float value) {
         this.baseValue = Utils.checkNegativeOneToOneLimits(value);
     }
+    
+    public final void increaseBaseValue(float value) {
+        this.baseValue = Utils.checkNegativeOneToOneLimits(this.baseValue+value);
+    }
 
     public void setEventInfluence(String eventName, float influence) {
         eventInfluence.put(eventName, Utils.checkZeroToOneLimits(influence));
