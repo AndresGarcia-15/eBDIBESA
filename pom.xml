@@ -7,7 +7,7 @@
 
     <groupId>io.github.iscoutb</groupId>
     <artifactId>ebdi-besa</artifactId>
-    <version>3.5</version>
+    <version>3.6.0</version>
     <packaging>jar</packaging>
 
     <name>eBDIBESA</name>
@@ -55,7 +55,7 @@
                     <artifactId>kernel-besa</artifactId>
                     <version>3.5.1</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.5.1.jar</systemPath>
+                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.6.0.jar</systemPath>
                 </dependency>
             </dependencies>
         </profile>
