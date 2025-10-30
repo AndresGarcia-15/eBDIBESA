@@ -42,45 +42,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <profiles>
-        <!-- Profile para desarrollo local usando archivos del sistema -->
-        <profile>
-            <id>local-dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>kernel-besa</artifactId>
-                    <version>3.5.1</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.6.0.jar</systemPath>
-                </dependency>
-            </dependencies>
-        </profile>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/ISCOUTB/*</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-        <!-- Profile para GitHub Packages -->
-        <profile>
-            <id>github-packages</id>
-            <repositories>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/ISCOUTB/*</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <dependencies>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>kernel-besa</artifactId>
-                    <version>3.5.1</version>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>kernel-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
